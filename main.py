@@ -65,8 +65,6 @@ def build_argparser():
                         "(0.5 by default)")
     return parser
 
-
-
 def connect_mqtt():
     ### TODO: Connect to the MQTT client ###
     client = mqtt.Client()
@@ -134,7 +132,6 @@ def infer_on_stream(args, client):
     last_count = 0
     counter = 0
     previous_count = 0
-    
     
     ### TODO: Loop until stream is over ###
     while cap.isOpened():

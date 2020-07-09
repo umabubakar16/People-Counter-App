@@ -66,23 +66,23 @@ deployed edge model. The potential effects of each of these are as follows...
 ## Model Used
 The Model used in this project is faster_rcnn_inception_v2_coco which is fast in detecting people with less errors. Intel openVINO already contains extensions for custom layers used in TensorFlow Object Detection Model Zoo.
 
-# Enter the following command to download the model from Tensorflow Object Detection Model Zoo:
+## Enter the following command to download the model from Tensorflow Object Detection Model Zoo:
 
 wget http://download.tensorflow.org/models/object_detection/faster_rcnn_inception_v2_coco_2018_01_28.tar.gz
 
-# Extract the tar.gz file by using the following command:
+## Extract the tar.gz file by using the following command:
 
 tar -xvf faster_rcnn_inception_v2_coco_2018_01_28.tar.gz
 
-# Change the directory to the extracted folder of the downloaded model using:
+## Change the directory to the extracted folder of the downloaded model using:
 
 cd faster_rcnn_inception_v2_coco_2018_01_28
 
-# Enter the following command to convert the TensorFlow model to Intermediate Representation (IR) or OpenVINO IR format:
+## Enter the following command to convert the TensorFlow model to Intermediate Representation (IR) or OpenVINO IR format:
 
 python /opt/intel/openvino/deployment_tools/model_optimizer/mo.py --input_model faster_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb --tensorflow_object_detection_api_pipeline_config pipeline.config --reverse_input_channels --tensorflow_use_custom_operations_config /opt/intel/openvino/deployment_tools/model_optimizer/extensions/front/tf/faster_rcnn_support.json
 
-# To run the project from /home/workspace#, enter the following command:
+## To run the project from /home/workspace#, enter the following command:
 
 python main.py -i resources/Pedestrian_Detect_2_1_1.mp4 -m faster_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.xml -l /opt/intel/openvino/deployment_tools/inference_engine/lib/intel64/libcpu_extension_sse4.so -d CPU -pt 0.4 | ffmpeg -v warning -f rawvideo -pixel_format bgr24 -video_size 768x432 -framerate 24 -i - http://0.0.0.0:3004/fac.ffm
 
